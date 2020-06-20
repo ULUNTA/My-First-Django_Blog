@@ -1,0 +1,15 @@
+{% extends 'blogapp/base.html' %}
+
+{% block content %}
+    <div class="post">
+        <!--投稿日時がポストされたら投稿日時を表示する-->
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+            <!--post.pkと書くことによって、Postオブジェクトのプライマリキーにアクセル-->
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}

@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Django_Blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Django_Blog</a></h1>
-        </div>
-
-        <div>
-            <p>published: 2020/06/16 21:31</p>
-            <h2><a href="">My first post</a></h2>
-            <p>こんばんは。宜しくお願い致します。</p>
-        </div>
-
-        <div>
-            <p>published: 2020/06/16 21:33</p>
-            <h2><a href="">My second post</a></h2>
-            <p>あいうえお</p>
-        </div>
-    </body>
-</html>
+<!--base.htmlとpost_list.htmlを結びつける-->
+{% extends 'blogapp/base.html' %}
+<!--base.htmlで書いたblock contentの中身を表示する。-->
+{% block content %}
+<!--viewで書いたpostsの中のpostを順番に並べる<div></div>の間が一投稿-->
+{% for post in posts %}
+<div class="post">
+    <div class="date">
+        <p>published: {{ post.published_date }}</p>
+    </div>
+    <!--model.pyのclass部分からview.pyを通じて引っ張ってきている-->
+    <!--{% url 'post_detail' pk=post.pk %}はurls.pyで書かれたnameから引っ張ってきている。-->
+    <!--pkはプライマリーキーの略。1,2,3といった番号を作成する。-->
+    <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+    <p>{{ post.text|linebreaksbr }}</p>
+</div>
+{% endfor %}
+{% endblock %}
+         
