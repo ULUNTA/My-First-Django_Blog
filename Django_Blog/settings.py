@@ -123,3 +123,6 @@ STATIC_URL = '/static/'
 
 #静的ファイルのパスを追加
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#ログインに成功した時にトップページにredirectする。
+LOGIN_REDIRECT_URL = '/'

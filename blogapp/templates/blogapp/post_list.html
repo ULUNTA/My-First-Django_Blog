@@ -6,6 +6,7 @@
 {% for post in posts %}
 <div class="post">
     <div class="date">
+        <br>
         <p>published: {{ post.published_date }}</p>
     </div>
     <!--model.pyのclass部分からview.pyを通じて引っ張ってきている-->
@@ -13,6 +14,18 @@
     <!--pkはプライマリーキーの略。1,2,3といった番号を作成する。-->
     <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
     <p>{{ post.text|linebreaksbr }}</p>
+
+    <!--コメントの投稿数を表示している。-->
+　　<a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+
+    <!--bootstrapからcardのフォーマットを拝借
+    <div class="card" style="width: 70rem;">
+        <div class="card-body">
+          <h5 class="card-title">ここに投稿のタイトル入れたい</h5>
+          <p class="card-text">ここに投稿の内容入れたい。</p>
+          <a href="#" class="btn btn-primary">編集ボタンにしたい。</a>
+        </div>
+      </div>-->
 </div>
 {% endfor %}
 {% endblock %}
